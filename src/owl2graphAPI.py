@@ -6,6 +6,7 @@
 import roslib;roslib.load_manifest('learning')
 import rospy
 import json_prolog
+import numpy as np
 
 #should I end the query when I am done???
 
@@ -30,29 +31,51 @@ def query_property(property_str,namespace_str = "http://www.hwu.ac.uk/osl/test.o
 
 #tested
 def get_labels(result_dict):
-	labels = []
 	labels_with_uri = []
 	for x in result_dict:
 		if not x['S'] in labels_with_uri:
 			labels_with_uri.append(x['S'])
 		if not x['O'] in labels_with_uri:
-			labels_with_uri.append(x['O'])
+			labels_with_uri.append(x['O'])	
+	return labels_with_uri
 
-	labels = [y.split('#')[1]	for y in labels_with_uri]
-	return labels
-    
+#tested
+def compute_adjacency_list(result_dict):
+	adj_list = dict()
+	obj_list = []
+	for solution in result_dict:
+		if adj_list.get(solution['S']) == None:
+			obj_list = []
+		else:
+			obj_list = adj_list.get(solution['S'])
+		obj_list.append(solution['O'])
+		adj_list[solution['S']] = obj_list
+	return adj_list
+
+#tested	    
 def compute_adjacency_matrix(node_list,query_result):
-    rs=[]
-    return rs
-    
+	dim = len(node_list)
+	adj_list = compute_adjacency_list(query_result)
+	adj_mtr = np.zeros((dim,dim) ,dtype = int)
+	for key in adj_list.keys():
+		i = node_list.index(key)
+		for y in adj_list[key]:
+			j = node_list.index(y)
+			adj_mtr[i][j] = 1
+
+	return adj_mtr
+
+#TODO    
 def verify_graph(labels_list, adjacency_mtr):
     return 1
     
+#tested
 def extract_graph(property_str,ontology_str = "test.owl"):
-    ontology_uri = "http://www.hwu.ac.uk/osl/%s" % ontology_str
-    query_result = query_property(property_str,ontology_uri)
-    result = Graph_bundle()
-    result.labels = get_labels(query_result)
-    result.adjacency_matrix = compute_adjacency_matrix(result.labels,query_result)
-    return result
+	ontology_uri = "http://www.hwu.ac.uk/osl/%s" % ontology_str
+	query_result = list(query_property(property_str,ontology_uri))
+	result = Graph_bundle()
+	result.labels = get_labels(query_result)
+	result.adjacency_matrix = compute_adjacency_matrix(result.labels,query_result)
+	result.labels = [y.split('#')[1]	for y in result.labels]
+	return result
     
