@@ -18,17 +18,17 @@ from pygraph.classes.graph import graph
 from pygraph.classes.digraph import digraph
 from pygraph.readwrite.dot import write
 
-    
+
 def render_graph(graph_obj, filename_str):
     dot = write(graph_obj)
     gvv = gv.readstring(dot)
     gv.layout(gvv,'dot')
     filename = "%s.png" % filename_str
     gv.render(gvv,'png',filename)
-    
+
 
 def create_graph(nodes_list, adjacency_matrix):
-    
+
 	if not (adjacency_matrix.shape[0] == adjacency_matrix.shape[1]):
 		raise Exception("adjacency matrix should be square")
 	
@@ -40,9 +40,9 @@ def create_graph(nodes_list, adjacency_matrix):
 		adjacency_matrix = np.triu(adjacency_matrix)
 	else:
 		gr = digraph()
-        
+
 	gr.add_nodes(nodes_list)
-    
+
 	#TODO not a very good way to do in python!!! Refactor this loop!
 	for x in range(len(adjacency_matrix)): 
 		for y in range(len(adjacency_matrix[x])): 
@@ -51,4 +51,3 @@ def create_graph(nodes_list, adjacency_matrix):
 				
 	return gr
 
-    
