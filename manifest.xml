@@ -5,6 +5,7 @@
 
   </description>
   <author>george</author>
+  <depend>json_prolog</depend>
   <license>BSD</license>
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/ontology_evolution</url>
