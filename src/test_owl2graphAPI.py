@@ -20,12 +20,12 @@ print "---- labels -----"
 print labels
 
 #compute the adjacency_list
-adj_list = compute_adjacency_list(solutions)
+adj_list = compute_adjacency_list(solutions,"http://www.hwu.ac.uk/osl/test.owl#eats")
 print "---- adjacency_list ----"
 print adj_list
 
 #compute the adjacency matrix
-adj_mtr = compute_adjacency_matrix(labels,solutions)
+adj_mtr = compute_adjacency_matrix(labels,solutions,"http://www.hwu.ac.uk/osl/test.owl#eats")
 print "---- adjacency_matrix ----"
 print adj_mtr
 
@@ -39,5 +39,5 @@ print "Graph_bundle: Adjacency Matrix ="
 print g.adjacency_matrix
 
 #save the graph as an image
-g_plot = create_graph(g.labels,g.adjacency_matrix)
+g_plot = create_graph(g.labels,g.adjacency_matrix,"eats")
 render_graph(g_plot, "g_graph")
