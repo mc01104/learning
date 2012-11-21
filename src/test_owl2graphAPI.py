@@ -6,6 +6,8 @@
 from owl2graphAPI import *
 from plot_graph import render_graph
 from plot_graph import create_graph
+from plot_graph import render_graph_color
+
 import numpy as np
 import rospy
 
@@ -41,3 +43,5 @@ print g.adjacency_matrix
 #save the graph as an image
 g_plot = create_graph(g.labels,g.adjacency_matrix,"eats")
 render_graph(g_plot, "g_graph")
+
+render_graph_color(g.labels,g.adjacency_matrix,"g_graph_color")

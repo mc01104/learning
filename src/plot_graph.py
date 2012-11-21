@@ -53,4 +53,31 @@ def create_graph(nodes_list, adjacency_matrix, label_str = ""):
 				
 	return gr
 
+# This is an alternative implementation that will support more formatting for the visualization
 
+def render_graph_color(node_list, adjacency_matrix,filename_str):
+	import pydot
+
+	if is_directed(adjacency_matrix):
+		graph = pydot.Dot(graph_type='digraph')
+	else:
+		graph = pydot.Dot(graph_type='graph')
+		
+	nodes_dot=[]
+	for n in node_list:
+		tmp = pydot.Node(n)
+		nodes_dot.append(tmp)
+		graph.add_node(tmp)
+
+	for i in range(len(adjacency_matrix)):
+		for j in range(len(adjacency_matrix[i])):
+			if adjacency_matrix[i][j] == 1:
+				graph.add_edge(pydot.Edge(nodes_dot[i], nodes_dot[j], label="eats", labelfontcolor="#009933", fontsize="10.0", color="red"))
+	
+	name =  "%s.png" % filename_str
+	#graph.write_png(name)
+	
+def is_directed(adjacency_matrix):
+	if (adjacency_matrix.transpose() == adjacency_matrix).all():
+		return 0
+	return 1
