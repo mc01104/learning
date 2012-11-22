@@ -10,6 +10,9 @@ import numpy as np
 
 #should I end the query when I am done???
 
+#if needed the list of colours can become longer or even of not fixed length
+colors = ["red","green","blue","black"]
+
 class GraphBundle(object):
 	def __init__(self):
 		object.__init__(self)
@@ -101,6 +104,9 @@ def extract_graph(property_str,ontology_str = "test.owl"):
 	result.adjacency_matrix = compute_adjacency_matrix(result.labels,query_result, prop_with_uri)
 	result.update_state()
 	result.labels = [y.split('#')[1]	for y in result.labels]
+	result.property_str = property_str
+	if colors:
+		result.edge_color = colors.pop()
 	return result
 
 

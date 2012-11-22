@@ -61,3 +61,12 @@ print "Graph_bundle: List of edges ="
 for i in g.edges:
 	print i
 
+print "Graph_bundle: Property ="
+print g.property_str
+
+print "Graph_bundle g: Edge Color ="
+print g.edge_color
+
+print "Graph_bundle g2: Edge Color ="
+g2 = extract_graph("eats")
+print g2.edge_color
