@@ -36,7 +36,7 @@ print "---- adjacency_matrix ----"
 print adj_mtr
 
 #testing the final (actual client function)
-g = Graph_bundle()
+g = GraphBundle()
 g = extract_graph("eats")
 print "---- Graph Bundle ----"
 print "Graph_bundle:Labels ="
@@ -52,13 +52,12 @@ render_graph_color(g.labels,g.adjacency_matrix,"g_graph_color")
 
 #test the pebl interface
 graph = graph2pebl(g.labels,g.adjacency_matrix)
-render_pebl_graph(graph,"test_pebl")
+#render_pebl_graph(graph,"test_pebl")
 
-#g.update_state()
+print "Graph_bundle: Adjacency List ="
+print g.adjacency_list
 
-#print "Graph_bundle: Adjacency List ="
-#print g.adjacency_list
-
-#print "Graph_bundle: List of edges ="
-#print g.edges
+print "Graph_bundle: List of edges ="
+for i in g.edges:
+	print i
 

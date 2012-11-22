@@ -10,16 +10,16 @@ import numpy as np
 
 #should I end the query when I am done???
 
-class Graph_bundle:
-    def __init__(self):
-        labels = []
-        edges = []
-        adjacency_matrix = []
-        adjacency_list = []
-        property_str = ""
-        edge_color = ""
-        
-	def update_state(cls):
+class GraphBundle(object):
+	def __init__(self):
+		object.__init__(self)
+		self.labels = []
+		self.edges = []
+		self.adjacency_matrix = []
+		self.adjacency_list = []
+		self.property_str = ""
+		self.edge_color = ""
+	def update_state(self):
 		self.adjacency_list = convert_adj_matrix_to_list(self.labels, self.adjacency_matrix)
 		self.edges = create_edge_list(self.labels,self.adjacency_matrix)
 		
@@ -96,9 +96,10 @@ def extract_graph(property_str,ontology_str = "test.owl"):
 	ontology_uri = "http://www.hwu.ac.uk/osl/%s" % ontology_str
 	prop_with_uri = ontology_uri + '#'  + property_str
 	query_result = list(query_property(property_str,ontology_uri))
-	result = Graph_bundle()
+	result = GraphBundle()
 	result.labels = get_labels(query_result)
 	result.adjacency_matrix = compute_adjacency_matrix(result.labels,query_result, prop_with_uri)
+	result.update_state()
 	result.labels = [y.split('#')[1]	for y in result.labels]
 	return result
 
@@ -132,7 +133,7 @@ def convert_adj_list_to_matrix(node_list,adj_list):
 def create_edge_list(node_list,adjacency_matrix):
 	edges = []
 	for(i,j) in get_indices(adjacency_matrix):
-		edges.extend([node_list[i],node_list[j]])
+		edges.append([node_list[i],node_list[j]])
 	return edges
 			
 #tested
