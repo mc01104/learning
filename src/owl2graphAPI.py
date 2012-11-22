@@ -13,8 +13,16 @@ import numpy as np
 class Graph_bundle:
     def __init__(self):
         labels = []
+        edges = []
         adjacency_matrix = []
-
+        adjacency_list = []
+        property_str = ""
+        edge_color = ""
+        
+	def update_state(cls):
+		self.adjacency_list = convert_adj_matrix_to_list(self.labels, self.adjacency_matrix)
+		self.edges = create_edge_list(self.labels,self.adjacency_matrix)
+		
 #tested        
 def query(query_str):
     prolog = json_prolog.Prolog()
@@ -72,17 +80,11 @@ def compute_adjacency_list(result_dict, prop_with_uri):
 			
 	return adj_list
 
-#tested	    
+#tested	
+#stripped out the conversion from list to matrix in a separate function - tested    
 def compute_adjacency_matrix(node_list,query_result, prop_with_uri):
-	dim = len(node_list)
 	adj_list = compute_adjacency_list(query_result,prop_with_uri)
-	adj_mtr = np.zeros((dim,dim) ,dtype = int)
-	for key in adj_list.keys():
-		i = node_list.index(key)
-		for y in adj_list[key]:
-			j = node_list.index(y)
-			adj_mtr[i][j] = 1
-
+	adj_mtr = convert_adj_list_to_matrix(node_list,adj_list)
 	return adj_mtr
 
 #TODO    
@@ -99,4 +101,56 @@ def extract_graph(property_str,ontology_str = "test.owl"):
 	result.adjacency_matrix = compute_adjacency_matrix(result.labels,query_result, prop_with_uri)
 	result.labels = [y.split('#')[1]	for y in result.labels]
 	return result
-    
+
+
+#tested   
+def convert_adj_matrix_to_list(node_list, adjacency_matrix):
+	adj_list = dict()
+	objects = []
+	for i in range(len(adjacency_matrix)):
+		mask = [item for item in range(len(adjacency_matrix[i])) if adjacency_matrix[i][item] == 1]
+		objects = [node_list[k] for k in mask]
+		if not objects:
+			continue
+		adj_list[node_list[i]] = objects
+		
+	return adj_list
+			
+
+#tested		
+def convert_adj_list_to_matrix(node_list,adj_list):
+	dim = len(node_list)
+	adj_mtr = np.zeros((dim,dim) ,dtype = int)
+	for key in adj_list.keys():
+		i = node_list.index(key)
+		for y in adj_list[key]:
+			j = node_list.index(y)
+			adj_mtr[i][j] = 1
+
+	return adj_mtr		
+
+def create_edge_list(node_list,adjacency_matrix):
+	edges = []
+	for(i,j) in get_indices(adjacency_matrix):
+		edges.extend([node_list[i],node_list[j]])
+	return edges
+			
+#tested
+def get_indices(matrix):
+	for i in range(len(matrix)):
+		for j in range(len(matrix[i])):
+			if matrix[i][j] == 1:
+				yield (i,j)
+				
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		

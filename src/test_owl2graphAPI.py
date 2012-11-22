@@ -8,6 +8,10 @@ from plot_graph import render_graph
 from plot_graph import create_graph
 from plot_graph import render_graph_color
 
+
+from pebl_interface import graph2pebl
+from pebl_interface import render_pebl_graph
+
 import numpy as np
 import rospy
 
@@ -45,3 +49,16 @@ g_plot = create_graph(g.labels,g.adjacency_matrix,"eats")
 render_graph(g_plot, "g_graph")
 
 render_graph_color(g.labels,g.adjacency_matrix,"g_graph_color")
+
+#test the pebl interface
+graph = graph2pebl(g.labels,g.adjacency_matrix)
+render_pebl_graph(graph,"test_pebl")
+
+#g.update_state()
+
+#print "Graph_bundle: Adjacency List ="
+#print g.adjacency_list
+
+#print "Graph_bundle: List of edges ="
+#print g.edges
+
