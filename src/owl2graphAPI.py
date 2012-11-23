@@ -21,10 +21,29 @@ class GraphBundle(object):
 		self.adjacency_matrix = []
 		self.adjacency_list = []
 		self.property_str = ""
+		if colors:
+			self.edge_color = colors.pop()
 		self.edge_color = ""
 	def update_state(self):
 		self.adjacency_list = convert_adj_matrix_to_list(self.labels, self.adjacency_matrix)
 		self.edges = create_edge_list(self.labels,self.adjacency_matrix)
+
+class MultiPropGraphBundle(GraphBundle):
+	def __init__(self):
+		GraphBundle.__init__(self)
+		self.graph = GraphBundle()
+		self.num_of_graphs = 0
+		self.edge_color = ""
+	def update_state(self):
+		for i in range(self.num_of_graphs):
+			self.adjacency_list = convert_adj_matrix_to_list(self.labels, self.adjacency_matrix)
+			self.edges = create_edge_list(self.labels,self.adjacency_matrix)
+	def flatten(self):
+		pass
+	def get_subgraph(self,property_str):
+		pass
+	def add_subgraph(self, graph_object):
+		pass
 		
 #tested        
 def query(query_str):
@@ -105,8 +124,7 @@ def extract_graph(property_str,ontology_str = "test.owl"):
 	result.update_state()
 	result.labels = [y.split('#')[1]	for y in result.labels]
 	result.property_str = property_str
-	if colors:
-		result.edge_color = colors.pop()
+
 	return result
 
 
