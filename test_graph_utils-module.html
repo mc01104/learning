@@ -3,7 +3,7 @@
           "DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>test_owl2graphAPI</title>
+  <title>test_graph_utils</title>
   <link rel="stylesheet" href="epydoc.css" type="text/css" />
   <script type="text/javascript" src="epydoc.js"></script>
 </head>
@@ -34,7 +34,7 @@
   <tr valign="top">
     <td width="100%">
       <span class="breadcrumbs">
-        Module&nbsp;test_owl2graphAPI
+        Module&nbsp;test_graph_utils
       </span>
     </td>
     <td>
@@ -44,16 +44,14 @@
     onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
         <tr><td align="right"><span class="options"
             >[<a href="frames.html" target="_top">frames</a
-            >]&nbsp;|&nbsp;<a href="test_owl2graphAPI-module.html"
+            >]&nbsp;|&nbsp;<a href="test_graph_utils-module.html"
             target="_top">no&nbsp;frames</a>]</span></td></tr>
       </table>
     </td>
   </tr>
 </table>
 <!-- ==================== MODULE DESCRIPTION ==================== -->
-<h1 class="epydoc">Module test_owl2graphAPI</h1><p class="nomargin-top"><span class="codelink"><a href="test_owl2graphAPI-pysrc.html">source&nbsp;code</a></span></p>
-<p>This is a just a test for the owl2graphAPI</p>
-
+<h1 class="epydoc">Module test_graph_utils</h1><p class="nomargin-top"><span class="codelink"><a href="test_graph_utils-pysrc.html">source&nbsp;code</a></span></p>
 <!-- ==================== VARIABLES ==================== -->
 <a name="section-Variables"></a>
 <table class="summary" border="1" cellpadding="3"
@@ -75,65 +73,70 @@
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a name="solutions"></a><span class="summary-name">solutions</span> = <code title="list(query_property(&quot;eats&quot;))">list(query_property(&quot;eats&quot;))</code>
+        <a name="a"></a><span class="summary-name">a</span> = <code title="[&quot;george&quot;, &quot;mpampis&quot;, &quot;kwstas&quot;]">[&quot;george&quot;, &quot;mpampis&quot;, &quot;kwstas&quot;]</code>
     </td>
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a name="labels"></a><span class="summary-name">labels</span> = <code title="get_labels(solutions)">get_labels(solutions)</code>
+        <a name="b"></a><span class="summary-name">b</span> = <code title="[&quot;george&quot;, &quot;eleni&quot;, &quot;kwstas&quot;, &quot;john&quot;]">[&quot;george&quot;, &quot;eleni&quot;, &quot;kwstas&quot;, &quot;john&quot;]</code>
     </td>
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a href="test_owl2graphAPI-module.html#adj_list" class="summary-name">adj_list</a> = <code title="compute_adjacency_list(solutions, &quot;http://www.hwu.ac.uk/osl/test.owl#e\
-ats&quot;)">compute_adjacency_list(solutions, &quot;http://www.hwu.a<code class="variable-ellipsis">...</code></code>
+        <a name="c"></a><span class="summary-name">c</span> = <code title="[&quot;george&quot;, &quot;spyros&quot;, &quot;mpampis&quot;, &quot;kwstas&quot;]">[&quot;george&quot;, &quot;spyros&quot;, &quot;mpampis&quot;, &quot;kwstas&quot;]</code>
     </td>
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a href="test_owl2graphAPI-module.html#adj_mtr" class="summary-name">adj_mtr</a> = <code title="compute_adjacency_matrix(labels, solutions, &quot;http://www.hwu.ac.uk/osl/\
-test.owl#eats&quot;)">compute_adjacency_matrix(labels, solutions, &quot;http://<code class="variable-ellipsis">...</code></code>
+        <a name="ad"></a><span class="summary-name">ad</span> = <code title="np.array([[0, 1, 1], [0, 1, 1], [1, 0, 0]])">np.array([[0, 1, 1], [0, 1, 1], [1, 0, 0]])</code>
     </td>
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a name="g"></a><span class="summary-name">g</span> = <code title="extract_graph(&quot;eats&quot;)">extract_graph(&quot;eats&quot;)</code>
+        <a href="test_graph_utils-module.html#bd" class="summary-name">bd</a> = <code title="np.array([[0, 1, 0, 0], [1, 1, 1, 1], [0, 1, 0, 0], [0, 0, 0, 0]])">np.array([[0, 1, 0, 0], [1, 1, 1, 1], [0, 1, 0, 0], [0, 0<code class="variable-ellipsis">...</code></code>
     </td>
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a name="g_plot"></a><span class="summary-name">g_plot</span> = <code title="create_graph(g.labels, g.adjacency_matrix, &quot;eats&quot;)">create_graph(g.labels, g.adjacency_matrix, &quot;eats&quot;)</code>
+        <a href="test_graph_utils-module.html#cd" class="summary-name">cd</a> = <code title="np.array([[0, 1, 0, 0], [1, 1, 1, 1], [0, 1, 0, 0], [0, 0, 0, 0]])">np.array([[0, 1, 0, 0], [1, 1, 1, 1], [0, 1, 0, 0], [0, 0<code class="variable-ellipsis">...</code></code>
     </td>
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a name="graph"></a><span class="summary-name">graph</span> = <code title="graph2pebl(g.labels, g.adjacency_matrix)">graph2pebl(g.labels, g.adjacency_matrix)</code>
+        <a name="graph_a"></a><span class="summary-name">graph_a</span> = <code title="GraphBundle()">GraphBundle()</code>
     </td>
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a name="g2"></a><span class="summary-name">g2</span> = <code title="extract_graph(&quot;eats&quot;)">extract_graph(&quot;eats&quot;)</code>
+        <a name="graph_b"></a><span class="summary-name">graph_b</span> = <code title="GraphBundle()">GraphBundle()</code>
     </td>
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a name="objects"></a><span class="summary-name">objects</span> = <code title="[&quot;Horse30&quot;, &quot;papries&quot;, &quot;Lion1&quot;, &quot;pipes&quot;]">[&quot;Horse30&quot;, &quot;papries&quot;, &quot;Lion1&quot;, &quot;pipes&quot;]</code>
+        <a name="graph_c"></a><span class="summary-name">graph_c</span> = <code title="GraphBundle()">GraphBundle()</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="g"></a><span class="summary-name">g</span> = <code title="merge_graph(graph_a, graph_b, graph_c)">merge_graph(graph_a, graph_b, graph_c)</code>
     </td>
   </tr>
 </table>
@@ -155,39 +158,37 @@ test.owl#eats&quot;)">compute_adjacency_matrix(labels, solutions, &quot;http://<
   </td>
 </tr>
 </table>
-<a name="adj_list"></a>
+<a name="bd"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
-  <h3 class="epydoc">adj_list</h3>
+  <h3 class="epydoc">bd</h3>
   
   <dl class="fields">
   </dl>
   <dl class="fields">
     <dt>Value:</dt>
       <dd><table><tr><td><pre class="variable">
-compute_adjacency_list(solutions, &quot;http://www.hwu.ac.uk/osl/test.owl#e<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
-ats&quot;)
+np.array([[0, 1, 0, 0], [1, 1, 1, 1], [0, 1, 0, 0], [0, 0, 0, 0]])
 </pre></td></tr></table>
 </dd>
   </dl>
 </td></tr></table>
 </div>
-<a name="adj_mtr"></a>
+<a name="cd"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
-  <h3 class="epydoc">adj_mtr</h3>
+  <h3 class="epydoc">cd</h3>
   
   <dl class="fields">
   </dl>
   <dl class="fields">
     <dt>Value:</dt>
       <dd><table><tr><td><pre class="variable">
-compute_adjacency_matrix(labels, solutions, &quot;http://www.hwu.ac.uk/osl/<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
-test.owl#eats&quot;)
+np.array([[0, 1, 0, 0], [1, 1, 1, 1], [0, 1, 0, 0], [0, 0, 0, 0]])
 </pre></td></tr></table>
 </dd>
   </dl>
