@@ -1,7 +1,4 @@
 #!/usr/bin/env python
-'''
-    This is a just a test for the graph_util module
-'''
 
 from owl2graphAPI import *
 from plot_graph import render_graph
