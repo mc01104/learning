@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 '''
-    This is a module that implements a basic interface with knowrob in order to extract graphs for bayesian learning
+    This is a module that implements a basic interface with knowrob in order to extract graphs for bayesian learning - testing autodoc
 '''
 
 import roslib;roslib.load_manifest('learning')
