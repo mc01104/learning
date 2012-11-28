@@ -50,18 +50,24 @@ class MultiPropGraphBundle(GraphBundle):
 		for graph in self.graphs:
 			if graph.property_str == property_str:
 				return graph
-	def add_subgraph(self, graph_object):
+	def add_subgraph(self, *graph_objects):
+		graph_object_list = list(graph_objects)
+		graph_object = graph_object_list[0]
+		graph_object_list.pop(0)		
 		self.graphs.append(graph_object)
 		self.update_state()
 		self.update_colormap()
+		if graph_object_list:
+			return self.add_subgraph(*graph_object_list)
 	def update_colormap(self):
 		for edge in self.graphs[-1].edges:
 			if self.edge_colormap.get(edge) == None:
 				self.edge_colormap[edge] = self.graphs[-1].edge_color
 			else:
 				self.edge_colormap[edge] = "yellow"
-
-
+	def update_edge_property_map(self):
+		pass
+		
 #tested   
 def convert_adj_matrix_to_list(node_list, adjacency_matrix):
 	adj_list = dict()

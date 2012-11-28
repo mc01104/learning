@@ -48,11 +48,11 @@ g = merge_graph(graph_a,graph_b, graph_c)
 render_graph_color(g,"test_merge")
 
 mg = MultiPropGraphBundle()
-mg.add_subgraph(graph_a)
-mg.add_subgraph(graph_b)
-mg.add_subgraph(graph_c)
+#~ mg.add_subgraph(graph_a)
+#~ mg.add_subgraph(graph_b)
+#~ mg.add_subgraph(graph_c)
 
-
+mg.add_subgraph(graph_a,graph_b,graph_c)
 render_graph_color(mg,"test_merge_with multi")
 #data_delimiter_change('../datasets/diabetes/diabetes.txt',',','\t')
 render_multi_prop_graph(mg,"test_merge_with multi_color")
