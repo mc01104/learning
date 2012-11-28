@@ -37,7 +37,6 @@ print "---- adjacency_matrix ----"
 print adj_mtr
 
 #testing the final (actual client function)
-g = GraphBundle()
 g = extract_graph("eats")
 print "---- Graph Bundle ----"
 print "Graph_bundle:Labels ="
@@ -45,9 +44,9 @@ print g.labels
 print "Graph_bundle: Adjacency Matrix ="
 print g.adjacency_matrix
 
-g.property_str = "eats"
+#g.property_str = "eats"
 #save the graph as an image
-g_plot = create_graph(g.labels,g.adjacency_matrix,"eats")
+g_plot = create_graph(g.labels,g.adjacency_matrix,g.property_str)
 render_graph(g_plot, "g_graph")
 
 render_graph_color(g,"g_graph_color")
@@ -68,11 +67,3 @@ print g.property_str
 
 print "Graph_bundle g: Edge Color ="
 print g.edge_color
-
-print "Graph_bundle g2: Edge Color ="
-g2 = extract_graph("eats")
-#objects = ["Horse30","papries","Lion1", "pipes"]
-#g2.labels = objects
-print g2.edge_color
-
-merge_graph(g,g2)

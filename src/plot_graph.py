@@ -21,6 +21,7 @@ from pygraph.classes.graph import graph
 from pygraph.classes.digraph import digraph
 from pygraph.readwrite.dot import write
 
+from graph_util import is_directed
 
 def render_graph(graph_obj, filename_str):
 	dot = write(graph_obj)
@@ -38,12 +39,17 @@ def create_graph(nodes_list, adjacency_matrix, label_str = ""):
 	if not (len(nodes_list) == adjacency_matrix.shape[0]):
 		raise Exception("number of nodes is inconsistent with the number of available node labels")
 	
-	if (adjacency_matrix.transpose() == adjacency_matrix).all():
+	#~ if (adjacency_matrix.transpose() == adjacency_matrix).all():
+		#~ gr = graph()
+		#~ adjacency_matrix = np.triu(adjacency_matrix)
+	#~ else:
+		#~ gr = digraph()
+	if is_directed(adjacency_matrix):
+		gr = digraph()
+	else:
 		gr = graph()
 		adjacency_matrix = np.triu(adjacency_matrix)
-	else:
-		gr = digraph()
-
+		
 	gr.add_nodes(nodes_list)
 
 	for x in range(len(adjacency_matrix)): 
@@ -74,12 +80,8 @@ def render_graph_color(graph_object,filename_str):
 	for i in range(len(adjacency_matrix)):
 		for j in range(len(adjacency_matrix[i])):
 			if adjacency_matrix[i][j] == 1:
-				graph.add_edge(pydot.Edge(nodes_dot[i], nodes_dot[j], label=graph_object.property_str, labelfontcolor="#009933", fontsize="10.0", color="red"))
+				graph.add_edge(pydot.Edge(nodes_dot[i], nodes_dot[j], label=graph_object.property_str, labelfontcolor="#009933", fontsize="10.0", color=graph_object.edge_color))
 	
 	name =  "%s.png" % filename_str
 	graph.write_png(name)
 	
-def is_directed(adjacency_matrix):
-	if (adjacency_matrix.transpose() == adjacency_matrix).all():
-		return 0
-	return 1

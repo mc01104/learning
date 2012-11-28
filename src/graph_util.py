@@ -6,7 +6,7 @@
 import numpy as np
 
 #if needed the list of colours can become longer or even of not fixed length
-colors = ["red","green","blue","black"]
+colors = ["yellow","red","green","blue","black"]
 
 
 class GraphBundle(object):
@@ -18,8 +18,10 @@ class GraphBundle(object):
 		self.adjacency_list = []
 		self.property_str = ""
 		if colors:
-			self.edge_color = colors.pop()
-		self.edge_color = ""
+			self.edge_color = colors[0]
+			colors.pop(0)
+		else:
+			self.edge_color = ""
 	def update_state(self):
 		self.adjacency_list = convert_adj_matrix_to_list(self.labels, self.adjacency_matrix)
 		self.edges = create_edge_list(self.labels,self.adjacency_matrix)
@@ -83,6 +85,11 @@ def get_indices(matrix):
 			if matrix[i][j] == 1:
 				yield (i,j)
 
+
+def is_directed(adjacency_matrix):
+	if (adjacency_matrix.transpose() == adjacency_matrix).all():
+		return 0
+	return 1
 						
 #tested -- i will move this function to the MultiPropGraphClass as the flatten method
 def merge_graph(graph_1, *graphs):
