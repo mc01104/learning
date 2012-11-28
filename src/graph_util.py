@@ -6,7 +6,7 @@
 import numpy as np
 
 #if needed, the list of colours can become longer or even of not fixed length
-colors = ["yellow","red","green","blue","black"]
+colors = ["red","green","blue","black"]
 
 
 class GraphBundle(object):
@@ -29,19 +29,37 @@ class GraphBundle(object):
 class MultiPropGraphBundle(GraphBundle):
 	def __init__(self):
 		GraphBundle.__init__(self)
-		self.graph = GraphBundle()
+		self.graphs = []
 		self.num_of_graphs = 0
 		self.edge_color = ""
+		self.edge_colormap = dict()
 	def update_state(self):
-		for i in range(self.num_of_graphs):
-			self.adjacency_list = convert_adj_matrix_to_list(self.labels, self.adjacency_matrix)
-			self.edges = create_edge_list(self.labels,self.adjacency_matrix)
+		for graph in self.graphs:
+			graph.update_state()
+		self.flatten()
 	def flatten(self):
-		pass
+		print len(self.graphs)
+		if len(self.graphs) ==1:
+			tmp_g = self.graphs[0]
+		else:
+			tmp_g = merge_graph(*self.graphs)
+		self.labels = tmp_g.labels
+		self.adjacency_matrix = tmp_g.adjacency_matrix
+		GraphBundle.update_state(self)
 	def get_subgraph(self,property_str):
-		pass
+		for graph in self.graphs:
+			if graph.property_str == property_str:
+				return graph
 	def add_subgraph(self, graph_object):
-		pass
+		self.graphs.append(graph_object)
+		self.update_state()
+		self.update_colormap()
+	def update_colormap(self):
+		for edge in self.graphs[-1].edges:
+			if self.edge_colormap.get(edge) == None:
+				self.edge_colormap[edge] = self.graphs[-1].edge_color
+			else:
+				self.edge_colormap[edge] = "yellow"
 
 
 #tested   
@@ -74,7 +92,7 @@ def convert_adj_list_to_matrix(node_list,adj_list):
 def create_edge_list(node_list,adjacency_matrix):
 	edges = []
 	for(i,j) in get_indices(adjacency_matrix):
-		edges.append([node_list[i],node_list[j]])
+		edges.append((node_list[i],node_list[j]))
 	return edges
 
 			
@@ -91,7 +109,7 @@ def is_directed(adjacency_matrix):
 		return 0
 	return 1
 						
-#tested -- i will move this function to the MultiPropGraphClass as the flatten method
+#tested 
 def merge_graph(graph_1, *graphs):
 	nodes_list = []	
 	args = list(graphs)
