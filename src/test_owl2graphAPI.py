@@ -3,6 +3,7 @@
     This is a just a test for the owl2graphAPI
 '''
 
+import rospy
 from owl2graphAPI import *
 from plot_graph import render_graph
 from plot_graph import create_graph
@@ -53,7 +54,7 @@ render_graph_color(g,"g_graph_color")
 
 #test the pebl interface
 graph = graph2pebl(g.labels,g.adjacency_matrix)
-#render_pebl_graph(graph,"test_pebl")
+render_pebl_graph(graph,"test_pebl")
 
 print "Graph_bundle: Adjacency List ="
 print g.adjacency_list
@@ -70,8 +71,8 @@ print g.edge_color
 
 print "Graph_bundle g2: Edge Color ="
 g2 = extract_graph("eats")
-objects = ["Horse30","papries","Lion1", "pipes"]
-g2.labels = objects
+#objects = ["Horse30","papries","Lion1", "pipes"]
+#g2.labels = objects
 print g2.edge_color
 
 merge_graph(g,g2)
