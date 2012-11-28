@@ -87,6 +87,7 @@ def render_graph_color(graph_object,filename_str):
 #TODO: merge this function with the above
 #TODO: implement mixed graph, the two opposing arrows don't look nice!
 #TODO: if this module ends-up being one function -> move it to graph_util	
+#TODO: also display multiple properties on edges.
 def render_multi_prop_graph(multi_prop_graph,filename_str):
 		
 	import pydot
