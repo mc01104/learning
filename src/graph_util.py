@@ -5,7 +5,7 @@
 
 import numpy as np
 
-#if needed the list of colours can become longer or even of not fixed length
+#if needed, the list of colours can become longer or even of not fixed length
 colors = ["yellow","red","green","blue","black"]
 
 

@@ -39,11 +39,6 @@ def create_graph(nodes_list, adjacency_matrix, label_str = ""):
 	if not (len(nodes_list) == adjacency_matrix.shape[0]):
 		raise Exception("number of nodes is inconsistent with the number of available node labels")
 	
-	#~ if (adjacency_matrix.transpose() == adjacency_matrix).all():
-		#~ gr = graph()
-		#~ adjacency_matrix = np.triu(adjacency_matrix)
-	#~ else:
-		#~ gr = digraph()
 	if is_directed(adjacency_matrix):
 		gr = digraph()
 	else:
@@ -65,13 +60,20 @@ def render_graph_color(graph_object,filename_str):
 	import pydot
 
 	node_list, adjacency_matrix = graph_object.labels, graph_object.adjacency_matrix
-	 
+
+	if not (adjacency_matrix.shape[0] == adjacency_matrix.shape[1]):
+		raise Exception("adjacency matrix should be square")
+	
+	if not (len(nodes_list) == adjacency_matrix.shape[0]):
+		raise Exception("number of nodes is inconsistent with the number of available node labels")
+			 
 	if is_directed(adjacency_matrix):
 		graph = pydot.Dot(graph_type='digraph')
 	else:
 		graph = pydot.Dot(graph_type='graph')
 		
 	nodes_dot=[]
+
 	for n in node_list:
 		tmp = pydot.Node(n)
 		nodes_dot.append(tmp)

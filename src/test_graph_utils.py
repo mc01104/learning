@@ -46,6 +46,6 @@ rospy.init_node('test_owl2graphAPI')
 #~ g = merge_graph(graph_a,graph_b, graph_c)
 #~ render_graph_color(g,"test_merge")
 
-data_delimiter_change('/home/george/Desktop/diabetes.txt',',','\t')
+data_delimiter_change('../datasets/diabetes/diabetes.txt',',','\t')
 
-generate_training_dataset('/home/george/Desktop/diabetes_pebl.txt')
+generate_training_dataset('../datasets/diabetes/diabetes_pebl.txt','../datasets/diabetes/diabetes_names.txt')

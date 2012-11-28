@@ -42,23 +42,39 @@ def num_of_lines(fname):
 	return i + 1
 
 #tested
-#TODO: need to add name of nodes and type of data
-#TODO: also some safety check
-def generate_training_dataset(filename_str):
-	nlines = num_of_lines(filename_str)
+#TODO: need to add name of nodes and type of data -- DONE -- #tested
+#TODO: in the future I will add options for each label...
+def generate_training_dataset(data_filename_str, header_filename_str):
+	nlines = num_of_lines(data_filename_str)
 	nlines_train = int(nlines/2)
-	f = open(filename_str,'r')
-	f_train = open(filename_str.split(".txt")[0] + "_train.txt",'w')
-	f_test = open(filename_str.split(".txt")[0] + "_test.txt",'w')
+	
+	f = open(data_filename_str,'r')
+	f_train = open(data_filename_str.split(".txt")[0] + "_train.txt",'w')
+	f_test = open(data_filename_str.split(".txt")[0] + "_test.txt",'w')
+	fh = open(header_filename_str,'r')
+
+	headers =[item.split('\n')[0] for item in fh.readlines()]
+	header_str = ""
+	for x in headers:
+		header_str += '''"%s"\t''' % x
+	header_str += '\n'
+	
+	f_train.write(header_str)
+	f_test.write(header_str)
+	
 	lines = f.readlines()
+
+	if not len(headers) == len(lines[0].split('\t')):
+		raise Exception("The number of labels doesn't correspond to the number of columns of the data file")
+		
 	random.shuffle(lines)
-	print nlines	
-	i = 0
+
 	for line in lines[0:nlines_train]:
-		i = i + 1
-		#f_train.write("sample-%s\t%s" % (i,line))
 		f_train.write(line)
 		
 	for line in lines[nlines_train+1:]:
 		f_test.write(line)
 
+	f_train.close()
+	f_test.close()
+	f.close()

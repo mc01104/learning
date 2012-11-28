@@ -44,7 +44,6 @@ print g.labels
 print "Graph_bundle: Adjacency Matrix ="
 print g.adjacency_matrix
 
-#g.property_str = "eats"
 #save the graph as an image
 g_plot = create_graph(g.labels,g.adjacency_matrix,g.property_str)
 render_graph(g_plot, "g_graph")
