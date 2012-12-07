@@ -20,6 +20,7 @@ import numpy as np
 from pygraph.classes.graph import graph
 from pygraph.classes.digraph import digraph
 from pygraph.readwrite.dot import write
+import pydot
 
 from graph_util import is_directed, get_indices
 
@@ -90,8 +91,6 @@ def render_graph_color(graph_object,filename_str):
 #TODO: also display multiple properties on edges.
 def render_multi_prop_graph(multi_prop_graph,filename_str):
 		
-	import pydot
-
 	node_list, adjacency_matrix = multi_prop_graph.labels, multi_prop_graph.adjacency_matrix
 
 	if not (adjacency_matrix.shape[0] == adjacency_matrix.shape[1]):
@@ -103,8 +102,9 @@ def render_multi_prop_graph(multi_prop_graph,filename_str):
 	if is_directed(adjacency_matrix):
 		graph = pydot.Dot(graph_type='digraph')
 	else:
-		graph = pydot.Dot(graph_type='graph')
-		
+		graph = pydot.Dot(graph_type='graph',compound='true',mindist='0',ranksep='0',nodesep='0')
+	
+	
 	nodes_dot=[]
 
 	for n in node_list:
@@ -116,11 +116,24 @@ def render_multi_prop_graph(multi_prop_graph,filename_str):
 				graph.add_edge(pydot.Edge(nodes_dot[i], nodes_dot[j], label=multi_prop_graph.property_str, labelfontcolor="#009933", fontsize="10.0", color=multi_prop_graph.edge_colormap[node_list[i],node_list[j]]))
 	
 	name =  "%s.png" % filename_str
+	
+	#add_legend(graph, multi_prop_graph.property_colormap)
 	graph.write_png(name)
-			
+
 		
-		
-		
+def add_legend(dot_graph_object,property_colormap):
+	legend = pydot.Cluster(graph_name = 'legend', label = 'Color', rankdir="TB")
+	node_list = []
+	for key,value in property_colormap.items():
+		node_list.append(pydot.Node(name=value, label=value,style='filled',shape='box',color=key)
+
+	[legend.add_node(n) for n in node_list]
+
+	for i in range(len(node_list) - 1):
+		legend.add_edge(pydot.Edge(node_list[i], node_list[i + 1],style="invis",constraint='True'))
+
+	dot_graph_object.add_subgraph(legend)
+	return dot_graph_object
 		
 		
 		
